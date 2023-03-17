@@ -22,17 +22,19 @@ async function findTerm(searchTerm) {
       gif.setAttribute('id',"gifs");
       gifContainer.append(gif);
       removeGifs()
+      input.value = '';
   }
 }
 
   form.addEventListener('submit', function(event) {
     event.preventDefault();
     const input = document.querySelector('#input');
+
     const searchTerm = input.value;
-    findTerm(searchTerm);
     if(input.value === ''){
       alert('Type the giphy you are looking for!')
-  }
+    }
+    findTerm(searchTerm);
 
   });
 
