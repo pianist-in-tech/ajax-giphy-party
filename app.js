@@ -7,6 +7,12 @@ async function findTerm(searchTerm) {
     const url = `https://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=pLXfaGhuMjeHdd4ZLSTpb9lo5cRWp15X`;
     const res = await axios.get(url);
     const gifArray = res.data.data;
+
+    if (gifArray.length === 0) {
+      
+      alert('No GIFs found for the given search term');
+    } else {
+    
     const randomGif = Math.floor(Math.random()*gifArray.length);
     const gifUrl = gifArray[randomGif].images.original.url;
       //create a gif to append the image from the URL
@@ -17,12 +23,16 @@ async function findTerm(searchTerm) {
       gifContainer.append(gif);
       removeGifs()
   }
-  
+}
+
   form.addEventListener('submit', function(event) {
     event.preventDefault();
     const input = document.querySelector('#input');
     const searchTerm = input.value;
     findTerm(searchTerm);
+    if(input.value === ''){
+      alert('Type the giphy you are looking for!')
+  }
 
   });
 
@@ -32,5 +42,4 @@ async function findTerm(searchTerm) {
       event.preventDefault();
       gifContainer.innerHTML = '';
      })
-
-  }
+    }
